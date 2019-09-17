@@ -11,7 +11,7 @@ class RORUnlocker:
         self.settings_path = os.path.join("632360","remote","UserProfiles")
         self.id_list = {}
         self.xml_header = '<?xml version="1.0" encoding="utf-8"?>'
-        self.characters = ["Engineer", "Huntress", "Mage", "Mercenary", "Toolbot", "Treebot"]
+        self.characters = ["Engineer", "Huntress", "Mage", "Mercenary", "Toolbot", "Treebot", "Loader"]
 
     def check_folders(self):
         self.id_list = {}

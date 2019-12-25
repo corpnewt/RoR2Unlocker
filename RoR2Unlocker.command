@@ -7,11 +7,159 @@ class RORUnlocker:
 
     def __init__(self):
         self.u = utils.Utils("Risk Of Rain 2 Unlocker")
-        self.user_folders = os.path.join(os.environ['SYSTEMDRIVE'] + "\\", "Program Files (x86)", "Steam", "userdata")
+        self.user_folders  = os.path.join(os.environ['SYSTEMDRIVE'] + "\\", "Program Files (x86)", "Steam", "userdata")
         self.settings_path = os.path.join("632360","remote","UserProfiles")
         self.id_list = {}
-        self.xml_header = '<?xml version="1.0" encoding="utf-8"?>'
-        self.characters = ["Engineer", "Huntress", "Mage", "Mercenary", "Toolbot", "Treebot", "Loader"]
+        self.xml_header    = '<?xml version="1.0" encoding="utf-8"?>'
+        self.characters    = ["Croco", "Engineer", "Huntress", "Loader", "Mage", "Mercenary", "Toolbot", "Treebot"]
+        self.items         = ["AttackSpeedOnCrit",
+                                "AutoCastEquipment",
+                                "BFG",
+                                "Bear",
+                                "BossDamageBonus",
+                                "BonusGoldPackOnKill",
+                                "BounceNearby",
+                                "BurnNearby",
+                                "Cleanse",
+                                "Clover",
+                                "Crowbar",
+                                "DroneBackup",
+                                "ElementalRings",
+                                "EnergizedOnEquipmentUse",
+                                "EquipmentMagazine",
+                                "ExecuteLowHealthElite",
+                                "ExtraLife",
+                                "Firework",
+                                "Gateway",
+                                "GainArmor",
+                                "GoldGat",
+                                "HealOnCrit",
+                                "Hoof",
+                                "IncreaseHealing",
+                                "Infusion",
+                                "JumpBoost",
+                                "KillEliteFrenzy",
+                                "LaserTurbine",
+                                "Lightning",
+                                "LunarPrimaryReplacement",
+                                "LunarTrinket",
+                                "LunarUtilityReplacement",
+                                "Medkit",
+                                "Meteor",
+                                "NovaOnHeal",
+                                "NovaOnLowHealth",
+                                "PassiveHealing",
+                                "Pearl",
+                                "ProtectionPotion",
+                                "RegenOnKill",
+                                "RepeatHeal",
+                                "Scanner",
+                                "SecondarySkillMagazine",
+                                "ShinyPearl",
+                                "ShockNearby",
+                                "Talisman",
+                                "Thorns",
+                                "Tonic",
+                                "TreasureCache",
+                                "WarCryOnMultiKill"]
+        self.skills        = ["Commando.FireShotgunBlast",
+                                "Commando.ThrowGrenade",
+                                "Croco.ChainableLeap",
+                                "Engi.WalkerTurret",
+                                "Engi.SpiderMine",
+                                "Huntress.MiniBlink",
+                                "Huntress.Snipe",
+                                "Loader.ZapFist",
+                                "Loader.YankHook",
+                                "Mage.FlyUp",
+                                "Mage.IceBomb",
+                                "Mage.LightningBolt",
+                                "Merc.EvisProjectile",
+                                "Merc.Uppercut",
+                                "Toolbot.Grenade",
+                                "Toolbot.Buzzsaw",
+                                "Treebot.PlantSonicBoom",
+                                "Treebot.Barrage"]
+        self.skins         = ["Commando.Alt1",
+                                "Croco.Alt1",
+                                "Huntress.Alt1",
+                                "Loader.Alt1",
+                                "Mage.Alt1",
+                                "Merc.Alt1",
+                                "Toolbot.Alt1",
+                                "Treebot.Alt1"]
+        self.achievements  = ["AttackSpeed",
+                                "BeatArena",
+                                "BurnToDeath",
+                                "CarryLunarItems",
+                                "ChargeTeleporterWhileNearDeath",
+                                "CommandoClearGameMonsoon",
+                                "CommandoKillOverloadingWorm",
+                                "CommandoNonLunarEndurance",
+                                "Complete20Stages",
+                                "Complete30StagesCareer",
+                                "CompleteMultiBossShrine",
+                                "CompletePrismaticTrial",
+                                "CompleteTeleporter",
+                                "CompleteTeleporterWithoutInjury",
+                                "CompleteThreeStages",
+                                "CompleteThreeStagesWithoutHealing",
+                                "CompleteUnknownEnding",
+                                "CrocoClearGameMonsoon",
+                                "CrocoTotalInfectionsMilestone",
+                                "DefeatSuperRoboBallBoss",
+                                "Die5Times",
+                                "Discover10UniqueTier1",
+                                "Discover5Equipment",
+                                "EngiArmy",
+                                "EngiKillBossQuick",
+                                "FailShrineChance",
+                                "FindDevilAltar",
+                                "FindTimedChest",
+                                "FindUniqueNewtStatues",
+                                "FreeMage",
+                                "HardEliteBossKill",
+                                "HardHitter",
+                                "HuntressClearGameMonsoon",
+                                "HuntressCollectCrowbars",
+                                "HuntressMaintainFullHealthOnFrozenWall",
+                                "KillBossQuantityInRun",
+                                "KillBossQuick",
+                                "KillElementalLemurians",
+                                "KillEliteMonster",
+                                "KillElitesMilestone",
+                                "KillGoldTitanInOneCycle",
+                                "KillTotalEnemies",
+                                "LoaderBigSlam",
+                                "LoaderClearGameMonsoon",
+                                "LoaderSpeedRun",
+                                "LogCollector",
+                                "LoopOnce",
+                                "MageAirborneMultiKill",
+                                "MageClearGameMonsoon",
+                                "MageFastBoss",
+                                "MageMultiKill",
+                                "MajorMultikill",
+                                "MaxHealingShrine",
+                                "MercClearGameMonsoon",
+                                "MercCompleteTrialWithFullHealth",
+                                "MercDontTouchGround",
+                                "MoveSpeed",
+                                "MultiCombatShrine",
+                                "RepeatFirstTeleporter",
+                                "RepeatedlyDuplicateItems",
+                                "RescueTreebot",
+                                "StayAlive1",
+                                "SuicideHermitCrabs",
+                                "ToolbotClearGameMonsoon",
+                                "ToolbotGuardTeleporter",
+                                "ToolbotKillImpBossWithBfg",
+                                "TotalDronesRepaired",
+                                "TotalMoneyCollected",
+                                "TreebotClearGameMonsoon",
+                                "TreebotDunkClayBoss",
+                                "TreebotLowHealthTeleporter",
+                                "UseThreePortals"]
 
     def check_folders(self):
         self.id_list = {}
@@ -29,7 +177,7 @@ class RORUnlocker:
                     xml = ET.parse(os.path.join(temp,y))
                     root = xml.getroot()
                     name = root.find("name").text
-                    coin = root.find("coins").text
+                    # coin = root.find("coins").text
                     if not x in self.id_list:
                         self.id_list[x] = []
                     self.id_list[x].append({
@@ -59,8 +207,12 @@ class RORUnlocker:
     def get_name(self, xml_root):
         return xml_root.find("name").text
 
-    def get_unlocks(self, xml_root):
-        return [x.text[11:] for x in xml_root.iter("unlock") if x.text.lower().startswith("characters.")]
+    def get_unlocks(self, xml_root, prefix="Characters."):
+        return [x.text[len(prefix):] for x in xml_root.iter("unlock") if x.text.lower().startswith(prefix.lower())]
+
+    def get_achievements(self, xml_root):
+        achievements = xml_root.find("achievementsList").text
+        return [] if achievements is None else achievements.split()
 
     def select_profile(self, profile):
         self.u.head("Select a Profile")
@@ -69,9 +221,17 @@ class RORUnlocker:
             name = self.get_name(y["root"])
             coins = self.get_coins(y["root"])
             unlocked = self.get_unlocks(y["root"])
+            skills = self.get_unlocks(y["root"],prefix="Skills.")
+            skins = self.get_unlocks(y["root"],prefix="Skins.")
+            items = self.get_unlocks(y["root"],prefix="Items.")
+            achievements = self.get_achievements(y["root"])
             print("{}. {}".format(x+1,name))
             print("  --> Coins:    {:,}".format(coins))
-            print("  --> Unlocked: {}".format(", ".join(unlocked) if len(unlocked) else "None"))
+            print("  --> Characters: {}".format(", ".join(unlocked) if len(unlocked) else "None"))
+            print("  --> Skills: {}".format(", ".join(skills) if len(skills) else "None"))
+            print("  --> Skins: {}".format(", ".join(skins) if len(skins) else "None"))
+            print("  --> Items: {}".format(", ".join(items) if len(items) else "None"))
+            print("  --> Achievements: {:,} of {:,} known unlocked ({:,} total).".format(len([x for x in achievements if x in self.achievements]),len(self.achievements),len(achievements)))
         print("")
         print("M. Return to Menu")
         print("Q. Quit")
@@ -96,10 +256,18 @@ class RORUnlocker:
         name = self.get_name(profile["root"])
         coins = self.get_coins(profile["root"])
         unlocked = self.get_unlocks(profile["root"])
+        skills = self.get_unlocks(profile["root"],prefix="Skills.")
+        skins = self.get_unlocks(profile["root"],prefix="Skins.")
+        items = self.get_unlocks(profile["root"],prefix="Items.")
+        achievements = self.get_achievements(profile["root"])
         self.u.head(name)
         print("")
         print("C. Coins:    {:,}".format(coins))
-        print("U. Unlocked: {}".format(", ".join(unlocked) if len(unlocked) else "None"))
+        print("U. Characters: {}".format(", ".join(unlocked) if len(unlocked) else "None"))
+        print("S. Skills: {}".format(", ".join(skills) if len(skills) else "None"))
+        print("K. Skins: {}".format(", ".join(skins) if len(skins) else "None"))
+        print("I. Items: {}".format(", ".join(items) if len(items) else "None"))
+        print("A. Achievements: {:,} of {:,} known unlocked ({:,} total).".format(len([x for x in achievements if x in self.achievements]),len(self.achievements),len(achievements)))
         print("")
         print("M. Main Menu")
         print("Q. Quit")
@@ -115,6 +283,14 @@ class RORUnlocker:
             self.update_coins(profile)
         elif menu == "u":
             self.update_unlocks(profile)
+        elif menu == "a":
+            self.update_achievements(profile)
+        elif menu == "s":
+            self.update_unlocks(profile,"Skills",self.skills)
+        elif menu == "k":
+            self.update_unlocks(profile,"Skins",self.skins)
+        elif menu == "i":
+            self.update_unlocks(profile,"Items",self.items)
         self.edit_profile(profile)
 
     def update_coins(self, profile):
@@ -149,77 +325,155 @@ class RORUnlocker:
         self.save_profile(profile)
         return self.update_coins(profile)
 
-    def lock_character(self, profile, character):
+    def set_achievements(self, profile, achievements):
+        achievements_string = " " + " ".join(achievements) if len(achievements) else ""
+        a = profile["root"].find("achievementsList")
+        a.text = " ".join(achievements) # achievements_string
+
+    def update_achievements(self, profile):
+        name = self.get_name(profile["root"])
+        achievements = self.get_achievements(profile["root"])
+        self.u.head("{}'s Achievements".format(name))
+        print("")
+        print("Currently {:,} of {:,} known unlocked ({:,} total):".format(len([x for x in achievements if x in self.achievements]),len(self.achievements),len(achievements)))
+        print("")
+        if not len(achievements):
+            print("None.")
+        else:
+            for x,y in enumerate(achievements):
+                print("{}. {}".format(str(x+1).rjust(len(str(len(achievements)))),y))
+        print("")
+        print("A. Unlock All {:,} Known".format(len(self.achievements)))
+        print("L. Lock All (Will remove ALL achievements - known or not)")
+        print("M. Profile Menu")
+        print("S. Show All Known")
+        print("Q. Quit")
+        print("")
+        print("Type the number of the achievement in the above list")
+        print("to re-lock it.  Or type the name of an achievement to")
+        print("unlock it.\n")
+        menu = self.u.grab("Please select an option:  ")
+        if not len(menu):
+            return self.update_achievements(profile)
+        if menu.lower() == "m":
+            return
+        elif menu.lower() == "q":
+            self.u.custom_quit()
+        elif menu.lower() == "a":
+            updated = False
+            for x in self.achievements:
+                if x in achievements: continue
+                updated = True
+                achievements.append(x)
+            if updated:
+                self.set_achievements(profile, achievements)
+                self.save_profile(profile)
+            return self.update_achievements(profile)
+        elif menu.lower() == "l":
+            achievements = []
+            self.set_achievements(profile, achievements)
+            self.save_profile(profile)
+            return self.update_achievements(profile)
+        elif menu.lower() == "s":
+            self.u.head("All {:,} Known Achievements".format(len(self.achievements)))
+            print("")
+            for x,y in enumerate(self.achievements):
+                print("{}. {}".format(str(x+1).rjust(len(str(len(self.achievements)))),y))
+            print("")
+            self.u.grab("Press [enter] to return...")
+            return self.update_achievements(profile)
+        try:
+            menu = int(menu)-1
+        except:
+            pass
+        if isinstance(menu,int):
+            if not -1<menu<len(achievements):
+                # Assume we're out of range
+                return self.update_achievements(profile)
+            # We have an index - let's remove it
+            achievements.remove(achievements[menu])
+            self.set_achievements(profile, achievements)
+            self.save_profile(profile)
+        else:
+            # Assume we're adding a custom achievement here
+            if not menu in achievements:
+                achievements.append(menu)
+                self.set_achievements(profile, achievements)
+                self.save_profile(profile)
+        return self.update_achievements(profile)
+
+    def _lock(self, profile, element, prefix="Characters."):
         # We have an index - let's remove it
         found = False
         for x in profile["root"].iter("unlock"):
-            if x.text.lower().startswith("characters.") and x.text.lower().endswith(character.lower()):
+            if x.text.lower().startswith(prefix.lower()) and x.text.lower().endswith(element.lower()):
                 # Found it - remove
                 found = True
                 parent = profile["root"].find("stats")
                 parent.remove(x)
         return found
 
-    def unlock_character(self, profile, character):
+    def _unlock(self, profile, element, prefix="Characters."):
         # Assume we typed a new one - let's add it.  Check if it exists first
         for x in profile["root"].iter("unlock"):
-            if x.text.lower().startswith("characters.") and x.text.lower().endswith(character.lower()):
+            if x.text.lower().startswith(prefix.lower()) and x.text.lower().endswith(element.lower()):
                 # Found it - bail
                 return False
         # If we got here - we should be able to add it as a child of the stats element
         a = profile["root"].find("stats")
         b = ET.SubElement(a,"unlock")
-        # Strip "Characters." from the header if it exists
-        if character.lower().startswith("characters."):
-            character = menu[11:]
-        b.text = "Characters."+character
+        # Strip prefix from the header if it exists
+        if element.lower().startswith(prefix.lower()):
+            element = menu[len(prefix):]
+        b.text = prefix+element
         return True
 
-    def update_unlocks(self, profile):
+    def update_unlocks(self, profile, prefix="Characters", local_list=None):
+        local_list = local_list if local_list else self.characters
         name = self.get_name(profile["root"])
-        unlocks = self.get_unlocks(profile["root"])
-        self.u.head("{}'s Unlocked Characters".format(name))
+        unlocks = self.get_unlocks(profile["root"],prefix=prefix+".")
+        self.u.head("{}'s Unlocked {}".format(name, prefix))
         print("")
         if len(unlocks):
             for x,y in enumerate(unlocks):
-                print("{}. {}".format(x+1, y))
+                print("{}. {}".format(str(x+1).rjust(len(str(len(unlocks)))),y))
         else:
-            print("No characters unlocked")
+            print("No {} unlocked".format(prefix.lower()))
         print("")
         print("A. Unlock All")
         print("L. Lock All")
         print("M. Profile Menu")
         print("Q. Quit")
         print("")
-        print("Type the number of the character in the above list")
-        print("to re-lock them.  Or type the name of a character to")
+        print("Type the number of the item in the above list")
+        print("to re-lock them.  Or type the name of a item to")
         print("unlock them.\n")
-        print("Known Unlockables:  {}\n".format(", ".join(self.characters)))
+        print("Known Unlockables:  {}\n".format(", ".join(local_list)))
         menu = self.u.grab("Please select an option:  ")
         if not len(menu):
-            return self.update_unlocks(profile)
+            return self.update_unlocks(profile, prefix, local_list)
         if menu.lower() == "m":
             return
         elif menu.lower() == "q":
             self.u.custom_quit()
         elif menu.lower() == "a":
-            # Unlock all characters we know of
+            # Unlock all items we know of
             found = False
-            for x in self.characters:
-                if self.unlock_character(profile,x):
+            for x in local_list:
+                if self._unlock(profile,x,prefix=prefix+"."):
                     found = True
             if found:
                 self.save_profile(profile)
-            return self.update_unlocks(profile)
+            return self.update_unlocks(profile, prefix, local_list)
         elif menu.lower() == "l":
-            # Lock all characters that we've unlocked
+            # Lock all items that we've unlocked
             found = False
             for x in unlocks:
-                if self.lock_character(profile,x):
+                if self._lock(profile,x,prefix=prefix+"."):
                     found = True
             if found:
                 self.save_profile(profile)
-            return self.update_unlocks(profile)
+            return self.update_unlocks(profile, prefix, local_list)
         # Should have value - check for int within range
         try:
             menu = int(menu)-1
@@ -228,16 +482,16 @@ class RORUnlocker:
         if isinstance(menu,int):
             if not -1<menu<len(unlocks):
                 # Assume we're out of range
-                return self.update_unlocks(profile)
+                return self.update_unlocks(profile, prefix, local_list)
             # We have an index - let's remove it
-            if self.lock_character(profile,unlocks[menu]):
+            if self._lock(profile,unlocks[menu],prefix=prefix+"."):
                 # Assume we removed it - let's write the file and return
                 self.save_profile(profile)
         else:
             # Assume we typed a new one - let's add it.  Check if it exists first
-            if self.unlock_character(profile,menu):
+            if self._unlock(profile,menu,prefix=prefix+"."):
                 self.save_profile(profile)
-        return self.update_unlocks(profile)
+        return self.update_unlocks(profile, prefix, local_list)
 
     def main(self):
         if not len(self.id_list):
@@ -256,9 +510,17 @@ class RORUnlocker:
                     name = self.get_name(z["root"])
                     coins = self.get_coins(z["root"])
                     unlocked = self.get_unlocks(z["root"])
+                    skills = self.get_unlocks(z["root"],prefix="Skills.")
+                    skins = self.get_unlocks(z["root"],prefix="Skins.")
+                    items = self.get_unlocks(z["root"],prefix="Items.")
+                    achievements = self.get_achievements(z["root"])
                     print("  - {}".format(name))
                     print("  --> Coins:    {:,}".format(coins))
-                    print("  --> Unlocked: {}".format(", ".join(unlocked) if len(unlocked) else "None"))
+                    print("  --> Characters: {}".format(", ".join(unlocked) if len(unlocked) else "None"))
+                    print("  --> Skills: {}".format(", ".join(skills) if len(skills) else "None"))
+                    print("  --> Skins: {}".format(", ".join(skins) if len(skins) else "None"))
+                    print("  --> Items: {}".format(", ".join(items) if len(items) else "None"))
+                    print("  --> Achievements: {:,} of {:,} known unlocked ({:,} total).".format(len([x for x in achievements if x in self.achievements]),len(self.achievements),len(achievements)))
         print("")
         print("Q. Quit")
         print("")
@@ -288,6 +550,8 @@ if __name__ == '__main__':
     r = RORUnlocker()
     u = utils.Utils()
     while True:
+        r.main()
+        continue
         try:
             r.main()
         except Exception as e:

@@ -339,6 +339,7 @@ class RORUnlock:
         # Let's populate the Items and Characters combo boxes from our data
         self.item_combo["values"] = [x.split(".")[-1] for x in sorted(self.data.get("Items",[]))]
         self.char_combo["values"] = sorted(list(self.data.get("Characters",[])))
+        self.skil_combo["values"] = []
         self.achi_combo["values"] = sorted(self.data.get("Achievements",[]))
         # Get the currently selected character if any
         curr_char = self.char_box.get(self.char_box.curselection()) if self.char_box.curselection() != () else None

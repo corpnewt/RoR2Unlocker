@@ -1,0 +1,193 @@
+{
+  "Characters": {
+    "Croco": {
+      "nick": "Croco",
+      "unlocks": [
+        "Skins.Croco.Alt1",
+        "Skills.Croco.ChainableLeap"
+      ]
+    },
+    "Engineer": {
+      "nick": "Engi",
+      "unlocks": [
+        "Skills.Engi.WalkerTurret",
+        "Skills.Engi.SpiderMine"
+      ]
+    },
+    "Huntress": {
+      "nick": "Huntress",
+      "unlocks": [
+        "Skins.Huntress.Alt1",
+        "Skills.Huntress.MiniBlink",
+        "Skills.Huntress.Snipe"
+      ]
+    },
+    "Loader": {
+      "nick": "Loader",
+      "unlocks": [
+        "Skins.Loader.Alt1",
+        "Skills.Loader.ZapFist",
+        "Skills.Loader.YankHook"
+      ]
+    },
+    "Mage": {
+      "nick": "Mage",
+      "unlocks": [
+        "Skins.Mage.Alt1",
+        "Skills.Mage.FlyUp",
+        "Skills.Mage.IceBomb",
+        "Skills.Mage.LightningBolt"
+      ]
+    },
+    "Mercenary": {
+      "nick": "Merc",
+      "unlocks": [
+        "Skins.Merc.Alt1",
+        "Skills.Merc.EvisProjectile",
+        "Skills.Merc.Uppercut"
+      ]
+    },
+    "Toolbot": {
+      "nick": "Toolbot",
+      "unlocks": [
+        "Skins.Toolbot.Alt1",
+        "Skills.Toolbot.Grenade",
+        "Skills.Toolbot.Buzzsaw"
+      ]
+    },
+    "Treebot": {
+      "nick": "Treebot",
+      "unlocks": [
+        "Skins.Treebot.Alt1",
+        "Skills.Treebot.PlantSonicBoom",
+        "Skills.Treebot.Barrage"
+      ]
+    }
+  },
+  "Items": [
+    "Items.AttackSpeedOnCrit",
+    "Items.AutoCastEquipment",
+    "Items.BFG",
+    "Items.Bear",
+    "Items.BossDamageBonus",
+    "Items.BonusGoldPackOnKill",
+    "Items.BounceNearby",
+    "Items.BurnNearby",
+    "Items.Cleanse",
+    "Items.Clover",
+    "Items.Crowbar",
+    "Items.DroneBackup",
+    "Items.ElementalRings",
+    "Items.EnergizedOnEquipmentUse",
+    "Items.EquipmentMagazine",
+    "Items.ExecuteLowHealthElite",
+    "Items.ExtraLife",
+    "Items.Firework",
+    "Items.Gateway",
+    "Items.GainArmor",
+    "Items.GoldGat",
+    "Items.HealOnCrit",
+    "Items.Hoof",
+    "Items.IncreaseHealing",
+    "Items.Infusion",
+    "Items.JumpBoost",
+    "Items.KillEliteFrenzy",
+    "Items.LaserTurbine",
+    "Items.Lightning",
+    "Items.LunarPrimaryReplacement",
+    "Items.LunarTrinket",
+    "Items.LunarUtilityReplacement",
+    "Items.Medkit",
+    "Items.Meteor",
+    "Items.NovaOnHeal",
+    "Items.NovaOnLowHealth",
+    "Items.PassiveHealing",
+    "Items.Pearl",
+    "Items.ProtectionPotion",
+    "Items.RegenOnKill",
+    "Items.RepeatHeal",
+    "Items.Scanner",
+    "Items.SecondarySkillMagazine",
+    "Items.ShinyPearl",
+    "Items.ShockNearby",
+    "Items.Talisman",
+    "Items.Thorns",
+    "Items.Tonic",
+    "Items.TreasureCache",
+    "Items.WarCryOnMultiKill"
+  ],
+  "Achievements": [
+    "AttackSpeed",
+    "BeatArena",
+    "BurnToDeath",
+    "CarryLunarItems",
+    "ChargeTeleporterWhileNearDeath",
+    "CommandoClearGameMonsoon",
+    "CommandoKillOverloadingWorm",
+    "CommandoNonLunarEndurance",
+    "Complete20Stages",
+    "Complete30StagesCareer",
+    "CompleteMultiBossShrine",
+    "CompletePrismaticTrial",
+    "CompleteTeleporter",
+    "CompleteTeleporterWithoutInjury",
+    "CompleteThreeStages",
+    "CompleteThreeStagesWithoutHealing",
+    "CompleteUnknownEnding",
+    "CrocoClearGameMonsoon",
+    "CrocoTotalInfectionsMilestone",
+    "DefeatSuperRoboBallBoss",
+    "Die5Times",
+    "Discover10UniqueTier1",
+    "Discover5Equipment",
+    "EngiArmy",
+    "EngiKillBossQuick",
+    "FailShrineChance",
+    "FindDevilAltar",
+    "FindTimedChest",
+    "FindUniqueNewtStatues",
+    "FreeMage",
+    "HardEliteBossKill",
+    "HardHitter",
+    "HuntressClearGameMonsoon",
+    "HuntressCollectCrowbars",
+    "HuntressMaintainFullHealthOnFrozenWall",
+    "KillBossQuantityInRun",
+    "KillBossQuick",
+    "KillElementalLemurians",
+    "KillEliteMonster",
+    "KillElitesMilestone",
+    "KillGoldTitanInOneCycle",
+    "KillTotalEnemies",
+    "LoaderBigSlam",
+    "LoaderClearGameMonsoon",
+    "LoaderSpeedRun",
+    "LogCollector",
+    "LoopOnce",
+    "MageAirborneMultiKill",
+    "MageClearGameMonsoon",
+    "MageFastBoss",
+    "MageMultiKill",
+    "MajorMultikill",
+    "MaxHealingShrine",
+    "MercClearGameMonsoon",
+    "MercCompleteTrialWithFullHealth",
+    "MercDontTouchGround",
+    "MoveSpeed",
+    "MultiCombatShrine",
+    "RepeatFirstTeleporter",
+    "RepeatedlyDuplicateItems",
+    "RescueTreebot",
+    "StayAlive1",
+    "SuicideHermitCrabs",
+    "ToolbotClearGameMonsoon",
+    "ToolbotGuardTeleporter",
+    "ToolbotKillImpBossWithBfg",
+    "TotalDronesRepaired",
+    "TotalMoneyCollected",
+    "TreebotClearGameMonsoon",
+    "TreebotDunkClayBoss",
+    "TreebotLowHealthTeleporter",
+    "UseThreePortals"
+  ]
+}

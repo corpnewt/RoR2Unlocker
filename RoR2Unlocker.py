@@ -386,6 +386,7 @@ class RORUnlock:
         elif menu == self.r_menu:
             profile = self.get_current_profile()
             if not profile or profile == self.current_profile: return
+            self.tk.title("Risk Of Rain 2 Unlocker:    {}".format(profile["file"]))
             self.current_profile = profile
             self.set_stage(2)
             # Load the lunar coin count

@@ -55,7 +55,7 @@ class RORUnlock:
         self.s_label.grid(row=0,column=0,columnspan=4,padx=10,pady=10,sticky="ew")
         self.r_label = tk.Label(self.tk,text="Profile:")
         self.r_label.grid(row=0,column=4,columnspan=4,padx=10,pady=10,sticky="ew")
-        self.c_label = tk.Label(self.tk,text="Lunar Coins:")
+        self.c_label = tk.Label(self.tk,text="Lunar Coins (0-2147483647):")
         self.c_label.grid(row=0,column=8,columnspan=4,padx=10,pady=10,sticky="ew")
         if self.logo_img:
             self.c = tk.Label(self.tk, image=self.logo_img)
@@ -73,8 +73,8 @@ class RORUnlock:
         self.r_menu = tk.OptionMenu(self.tk, self.r_string, ())
         self.r_menu.grid(row=1,column=4,columnspan=4,padx=10,pady=10,sticky="ew")
         self.c_string = tk.StringVar()
-        self.c_string.trace("w", lambda name, index, mode, sv=self.c_string: self.coin_updated(sv))
-        self.c_entry = tk.Entry(self.tk,textvariable=self.c_string)
+        self.c_entry = tk.Spinbox(self.tk,from_=0,to=2147483647,validate="key",textvariable=self.c_string)
+        self.c_entry.configure(validatecommand=(self.c_entry.register(self.validate_coins),'%P'))
         self.c_entry.grid(row=1,column=8,columnspan=4,padx=10,pady=10,sticky="ew")
 
         # Add the labels for the Items, Characters, Skills/Skins, and Achievements
@@ -277,18 +277,24 @@ class RORUnlock:
         collected_coins.text = str(coin_amount)
         self.save_profile()
 
-    def coin_updated(self, var):
-        # Let's strip any non-number values
-        curr = var.get()
-        self.set_coins(curr if len(curr) else 0)
+    def validate_coins(self,value):
+        try: value = int(value)
+        except:
+            self.tk.bell()
+            return False
+        if not 0 <= value <= 2147483647:
+            self.tk.bell()
+            return False
+        self.set_coins(value)
+        return True
 
     def get_current_profile(self):
+        if not self.s_string.get() in self.id_list: return None
         return next((x for x in self.id_list[self.s_string.get()] if x["name"] == self.r_string.get()),None)
 
     def get_coins(self):
-        return self.get_current_profile()["root"].find("coins").text
-        # try: return int(self.get_current_profile()["root"].find("coins").text)
-        # except: return 0
+        try: return int(self.get_current_profile()["root"].find("coins").text)
+        except: return 0
 
     def update_boxes(self, preserve_selection = True):
         # This is a helper method to gather our current selections from each box,
@@ -379,9 +385,8 @@ class RORUnlock:
             self.current_profile = profile
             self.set_stage(2)
             # Load the lunar coin count
-            # self.c_entry.delete(0,"end")
-            # self.c_entry.insert(0,self.get_coins())
             self.c_string.set(self.get_coins())
+            self.c_entry.selection_clear()
             self.c_entry.icursor(tk.END)
             # Update our Items, Characters, and Skills/Skins boxes
             self.update_boxes(preserve_selection=False)

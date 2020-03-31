@@ -114,7 +114,14 @@
     "Items.Thorns",
     "Items.Tonic",
     "Items.TreasureCache",
-    "Items.WarCryOnMultiKill"
+    "Items.WarCryOnMultiKill",
+    "Items.ArmorPlate",
+    "Items.Squid",
+    "Items.DeathMark",
+    "Items.Plant",
+    "Items.Incubator",
+    "Items.FocusConvergence",
+    "Items.Recycle"
   ],
   "Achievements": [
     "AttackSpeed",
@@ -188,6 +195,30 @@
     "TreebotClearGameMonsoon",
     "TreebotDunkClayBoss",
     "TreebotLowHealthTeleporter",
-    "UseThreePortals"
+    "UseThreePortals",
+    "CleanupDuty",
+    "AutomationActivation",
+    "NeverBackDown",
+    "CrocoKillWeakEnemiesMilestone",
+    "EngiClearTeleporterWithZeroMonsters",
+    "HuntressAllGlaiveBouncesKill",
+    "CommandoFastFirstStageClear",
+    "CrocoKillScavenger",
+    "ObtainArtifactBomb",
+    "ObtainArtifactCommand",
+    "ObtainArtifactEliteOnly",
+    "ObtainArtifactEnigma",
+    "ObtainArtifactFriendlyFire",
+    "ObtainArtifactGlass",
+    "ObtainArtifactMixEnemy",
+    "ObtainArtifactMonsterTeamGainsItems",
+    "ObtainArtifactRandomSurvivorOnRespawn",
+    "ObtainArtifactSacrifice",
+    "ObtainArtifactShadowClone",
+    "ObtainArtifactSingleMonsterType",
+    "ObtainArtifactSwarms",
+    "ObtainArtifactTeamDeath",
+    "ObtainArtifactWeakAssKnees",
+    "ObtainArtifactWispOnDeath"
   ]
 }

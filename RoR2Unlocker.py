@@ -324,12 +324,12 @@ class RORUnlock:
         self.achi_box.delete(0,tk.END)
         # Gather and walk the Item and Character unlocks
         unlocks = [x.text for x in profile["root"].iter("unlock")]
-        items = [x for x in unlocks if x.lower().startswith("items.")]
+        items = [x for x in unlocks if x.lower().startswith(("artifacts.","items."))]
         chars = [x for x in unlocks if x.lower().startswith("characters.")]
         achis = profile["root"].find("achievementsList").text
         achis = achis.split() if achis else [] # Just in case it was None
-        for x in items: self.item_box.insert(tk.END,x[6:])
-        for x in chars: self.char_box.insert(tk.END,x[11:])
+        for x in items: self.item_box.insert(tk.END,x)
+        for x in chars: self.char_box.insert(tk.END,x)
         for x in achis: self.achi_box.insert(tk.END,x)
         # Auto-select the previous item of each box if exists - or the first if possible
         if len(items):
@@ -347,8 +347,8 @@ class RORUnlock:
             self.achi_box.selection_set(index)
             self.achi_box.see(index)
         # Let's populate the Items and Characters combo boxes from our data
-        self.item_combo["values"] = [x.split(".")[-1] for x in sorted(self.data.get("Items",[]))]
-        self.char_combo["values"] = sorted(list(self.data.get("Characters",[])))
+        self.item_combo["values"] = [x for x in sorted(self.data.get("Items",[]))]
+        self.char_combo["values"] = ["Characters."+ x for x in sorted(list(self.data.get("Characters",[])))]
         self.skil_combo["values"] = []
         self.achi_combo["values"] = sorted(self.data.get("Achievements",[]))
         # Get the currently selected character if any
@@ -360,7 +360,7 @@ class RORUnlock:
             if not x.lower().startswith(("skills.","skins.")): continue
             try: check_char = x.split(".")[1]
             except: continue
-            if curr_char.lower().startswith(check_char.lower()):
+            if curr_char.split(".")[-1].lower().startswith(check_char.lower()):
                 skils.append(x)
         for x in skils: self.skil_box.insert(tk.END,x)
         if len(skils):
@@ -368,7 +368,7 @@ class RORUnlock:
             self.skil_box.selection_set(index)
             self.skil_box.see(index)
         # Let's get any applicable unlocks for our current character
-        self.skil_combo["values"] = sorted(self.data.get("Characters",{}).get(curr_char,{}).get("unlocks",[]))
+        self.skil_combo["values"] = sorted(self.data.get("Characters",{}).get(curr_char.split(".")[-1],{}).get("unlocks",[]))
 
     def option_pick(self, menu, value, var):
         if var.get() == value: return # Nothing to do
@@ -407,10 +407,10 @@ class RORUnlock:
         return
 
     def unlock_item(self, event=None, item=None, update=True):
-        prefix = "Items."
+        prefix = ("Items.","Artifacts.")
         curr = item if item else self.item_combo.get()
         if not curr: return # Nothing to unlock
-        if not curr.startswith(prefix): curr = prefix+curr
+        if not curr.startswith(prefix): curr = prefix[0]+curr
         self.unlock(curr)
         if update: self.update_boxes()
 
@@ -422,7 +422,7 @@ class RORUnlock:
     def lock_item(self, event=None, item=None, update=True):
         curr = item if item else self.item_box.get(self.item_box.curselection()) if self.item_box.curselection() != () else None
         if not curr: return
-        self.lock("Items."+curr)
+        self.lock(curr)
         if update: self.update_boxes()
 
     def lock_items(self, event=None, update=True):
@@ -446,7 +446,7 @@ class RORUnlock:
     def lock_char(self, event=None, item=None, update=True):
         curr = item if item else self.char_box.get(self.char_box.curselection()) if self.char_box.curselection() != () else None
         if not curr: return
-        self.lock("Characters."+curr)
+        self.lock(curr)
         # Also lock all respective skills/skins for that char if our profile is valid
         profile = self.get_current_profile()
         if profile:
@@ -528,7 +528,7 @@ class RORUnlock:
         if not profile: return # Can't iterate what we can't see
         unlocks = [x.text for x in profile["root"].iter("unlock")]
         for x in unlocks:
-            if x.lower().startswith(("characters.","items.","skills.","skins.")):
+            if x.lower().startswith(("characters.","artifacts.","items.","skills.","skins.")):
                 self.lock(x)
         # Lock the achievements
         a = profile["root"].find("achievementsList")
@@ -549,7 +549,7 @@ class RORUnlock:
             if not x.lower().startswith(("skills.","skins.")): continue
             try: check_char = x.split(".")[1]
             except: continue
-            if current_character.lower().startswith(check_char.lower()):
+            if current_character.split(".")[-1].lower().startswith(check_char.lower()):
                 skils.append(x)
         self.skil_box.delete(0,tk.END)
         for x in skils:
@@ -558,7 +558,7 @@ class RORUnlock:
             self.skil_box.selection_set(0)
             self.skil_box.see(0)
         # Let's get any applicable unlocks for our current character
-        self.skil_combo["values"] = sorted(self.data.get("Characters",{}).get(current_character,{}).get("unlocks",[]))
+        self.skil_combo["values"] = sorted(self.data.get("Characters",{}).get(current_character.split(".")[-1],{}).get("unlocks",[]))
 
     def check_folders(self):
         self.id_list = {}

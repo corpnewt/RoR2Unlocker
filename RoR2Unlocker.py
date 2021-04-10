@@ -165,6 +165,10 @@ class RORUnlock:
         self.master_lock = tk.Button(self.tk,text="LOCK EVERYTHING",command=self.lock_everything)
         self.master_lock.grid(row=11,column=12,sticky="swe",padx=10,pady=10,columnspan=4)
 
+        # Add the dump to json button
+        self.dump_to_json = tk.Button(self.tk,text="Dump Current To JSON",command=self.dump_json)
+        self.dump_to_json.grid(row=11,column=5,sticky="swe",padx=10,pady=10,columnspan=4)
+
         # Let's gather the items in each stage
         self.stages = [
             [self.s_menu], # Stage 0
@@ -192,7 +196,8 @@ class RORUnlock:
                 self.achi_lock,
                 self.achi_unlock_all,
                 self.master_unlock,
-                self.master_lock
+                self.master_lock,
+                self.dump_to_json
             ]
         ]
         self.set_stage()
@@ -207,6 +212,52 @@ class RORUnlock:
         for x in self.id_list:
             self.s_menu["menu"].add_command(label=x,command=lambda menu=self.s_menu, value=x, var=self.s_string: self.option_pick(menu,value,var))
         tk.mainloop()
+
+    def dump_json(self, event = None):
+        profile = self.get_current_profile()
+        if not profile: return
+        # Get the file dialog
+        path = fd.asksaveasfilename(
+            title="Please select a file name for saving:",
+            defaultextension=".json",
+            initialfile="ror2data.json",
+            initialdir=os.path.dirname(os.path.realpath(__file__))
+            )
+        if not len(path): return
+        # We need to get the Items, Characters, Skills, and Achievements,
+        # organize and sort them - then save to the target json
+        out_dict = {"Characters":{},"Items":[],"Achievements":[]}
+        char_dict = {}
+        # Let's gather all the characters, artifacts, and items
+        for x in profile["root"].iter("unlock"):
+            if x.text.lower().startswith("characters."):
+                name = x.text.split(".")[-1]
+                char_dict[name] = {"nick":name,"unlocks":[]}
+            elif x.text.lower().startswith(("artifacts.","items.")):
+                out_dict["Items"].append(x.text)
+        # Now we can walk all the Skills/Skins
+        for x in profile["root"].iter("unlock"):
+            if not x.text.lower().startswith(("skills.","skins.")): continue 
+            # Normalize the character name
+            nick = x.text.split(".")[1]
+            for name in char_dict:
+                if not name.lower().startswith(nick.lower()): continue
+                # Make sure we retain the nickname - but save the data
+                char_dict[name]["nick"] = nick
+                char_dict[name]["unlocks"].append(x.text)
+        # Sort the data alphabetically
+        for char in sorted(char_dict):
+            out_dict["Characters"][char] = {
+                "nick":char_dict[char]["nick"],
+                "unlocks":sorted(char_dict[char]["unlocks"])
+            }
+        # Set the out_dict values
+        out_dict["Characters"] = char_dict
+        out_dict["Items"] = sorted(out_dict["Items"])
+        achi = profile["root"].find("achievementsList").text
+        if achi: out_dict["Achievements"] = sorted(achi.split())
+        # Save the data
+        json.dump(out_dict,open(path,"w"),indent=2)
 
     def save_profile(self):
         profile = self.get_current_profile()

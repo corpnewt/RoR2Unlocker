@@ -47,7 +47,8 @@ class RORUnlock:
         for x in range(16):
             weight = 0 if x in (2,3,6,7,10,11,14,15) else 1
             self.tk.columnconfigure(x,weight=weight)
-            weight = 0 if x in (0,1,2) else 0
+            # weight = 0 if x in (0,1,2) else 1
+            weight = 1 if x == 3 else 0
             self.tk.rowconfigure(x,weight=weight)
         
         # Add the labels for the SteamID, Profile, Lunar Coins, and the Logo if possible
@@ -115,13 +116,13 @@ class RORUnlock:
 
         # Add the combo boxes
         self.item_combo = ttk.Combobox(self.tk,values=[])
-        self.item_combo.grid(row=8,column=0,columnspan=4,sticky="we",padx=10,pady=10)
+        self.item_combo.grid(row=8,column=0,columnspan=4,sticky="swe",padx=10,pady=10)
         self.char_combo = ttk.Combobox(self.tk,values=[])
-        self.char_combo.grid(row=8,column=4,columnspan=4,sticky="we",padx=10,pady=10)
+        self.char_combo.grid(row=8,column=4,columnspan=4,sticky="swe",padx=10,pady=10)
         self.skil_combo = ttk.Combobox(self.tk,values=[])
-        self.skil_combo.grid(row=8,column=8,columnspan=4,sticky="we",padx=10,pady=10)
+        self.skil_combo.grid(row=8,column=8,columnspan=4,sticky="swe",padx=10,pady=10)
         self.achi_combo = ttk.Combobox(self.tk,values=[])
-        self.achi_combo.grid(row=8,column=12,columnspan=4,sticky="we",padx=10,pady=10)
+        self.achi_combo.grid(row=8,column=12,columnspan=4,sticky="swe",padx=10,pady=10)
 
         # Add the list box events
         self.item_box.bind("<Double-1>",lambda x:self.item_selected(self.item_box,self.item_combo))
@@ -132,37 +133,37 @@ class RORUnlock:
 
         # Add the Unlock/Lock buttons
         self.item_unlock = tk.Button(self.tk,text="Unlock",command=self.unlock_item)
-        self.item_unlock.grid(row=9,column=0,sticky="we",padx=10,pady=10)
+        self.item_unlock.grid(row=9,column=0,sticky="swe",padx=10,pady=10)
         self.item_lock = tk.Button(self.tk,text="Lock",command=self.lock_item)
-        self.item_lock.grid(row=9,column=1,sticky="we",padx=10,pady=10,columnspan=3)
+        self.item_lock.grid(row=9,column=1,sticky="swe",padx=10,pady=10,columnspan=3)
         self.char_unlock = tk.Button(self.tk,text="Unlock",command=self.unlock_char)
-        self.char_unlock.grid(row=9,column=4,sticky="we",padx=10,pady=10)
+        self.char_unlock.grid(row=9,column=4,sticky="swe",padx=10,pady=10)
         self.char_lock = tk.Button(self.tk,text="Lock",command=self.lock_char)
-        self.char_lock.grid(row=9,column=5,sticky="we",padx=10,pady=10,columnspan=3)
+        self.char_lock.grid(row=9,column=5,sticky="swe",padx=10,pady=10,columnspan=3)
         self.skil_unlock = tk.Button(self.tk,text="Unlock",command=self.unlock_skil)
-        self.skil_unlock.grid(row=9,column=8,sticky="we",padx=10,pady=10)
+        self.skil_unlock.grid(row=9,column=8,sticky="swe",padx=10,pady=10)
         self.skil_lock = tk.Button(self.tk,text="Lock",command=self.lock_skil)
-        self.skil_lock.grid(row=9,column=9,sticky="we",padx=10,pady=10,columnspan=3)
+        self.skil_lock.grid(row=9,column=9,sticky="swe",padx=10,pady=10,columnspan=3)
         self.achi_unlock = tk.Button(self.tk,text="Unlock",command=self.unlock_achi)
-        self.achi_unlock.grid(row=9,column=12,sticky="we",padx=10,pady=10)
+        self.achi_unlock.grid(row=9,column=12,sticky="swe",padx=10,pady=10)
         self.achi_lock = tk.Button(self.tk,text="Lock",command=self.lock_achi)
-        self.achi_lock.grid(row=9,column=13,sticky="we",padx=10,pady=10,columnspan=3)
+        self.achi_lock.grid(row=9,column=13,sticky="swe",padx=10,pady=10,columnspan=3)
 
         # Add the Unlock All buttons
         self.item_unlock_all = tk.Button(self.tk,text="Unlock All",command=self.unlock_items)
-        self.item_unlock_all.grid(row=10,column=0,sticky="we",padx=10,pady=10,columnspan=4)
+        self.item_unlock_all.grid(row=10,column=0,sticky="swe",padx=10,pady=10,columnspan=4)
         self.char_unlock_all = tk.Button(self.tk,text="Unlock All",command=self.unlock_chars)
-        self.char_unlock_all.grid(row=10,column=4,sticky="we",padx=10,pady=10,columnspan=4)
+        self.char_unlock_all.grid(row=10,column=4,sticky="swe",padx=10,pady=10,columnspan=4)
         self.skil_unlock_all = tk.Button(self.tk,text="Unlock All",command=self.unlock_skils)
-        self.skil_unlock_all.grid(row=10,column=8,sticky="we",padx=10,pady=10,columnspan=4)
+        self.skil_unlock_all.grid(row=10,column=8,sticky="swe",padx=10,pady=10,columnspan=4)
         self.achi_unlock_all = tk.Button(self.tk,text="Unlock All",command=self.unlock_achis)
-        self.achi_unlock_all.grid(row=10,column=12,sticky="we",padx=10,pady=10,columnspan=4)
+        self.achi_unlock_all.grid(row=10,column=12,sticky="swe",padx=10,pady=10,columnspan=4)
 
         # Add the master lock/unlock buttons
         self.master_unlock = tk.Button(self.tk,text="UNLOCK EVERYTHING",command=self.unlock_everything)
-        self.master_unlock.grid(row=11,column=0,sticky="we",padx=10,pady=10,columnspan=4)
+        self.master_unlock.grid(row=11,column=0,sticky="swe",padx=10,pady=10,columnspan=4)
         self.master_lock = tk.Button(self.tk,text="LOCK EVERYTHING",command=self.lock_everything)
-        self.master_lock.grid(row=11,column=12,sticky="we",padx=10,pady=10,columnspan=4)
+        self.master_lock.grid(row=11,column=12,sticky="swe",padx=10,pady=10,columnspan=4)
 
         # Let's gather the items in each stage
         self.stages = [

@@ -1,74 +1,92 @@
 {
   "Characters": {
+    "Bandit2": {
+      "nick": "Bandit2",
+      "unlocks": [
+        "Skills.Bandit2.Rifle",
+        "Skills.Bandit2.SerratedShivs",
+        "Skills.Bandit2.SkullRevolver",
+        "Skins.Bandit2.Alt1"
+      ]
+    },
     "Captain": {
       "nick": "Captain",
       "unlocks": [
-        "Skins.Captain.Alt1",
+        "Skills.Captain.CaptainSupplyDropEquipmentRestock",
         "Skills.Captain.CaptainSupplyDropHacking",
-        "Skills.Captain.CaptainSupplyDropEquipmentRestock"
+        "Skills.Captain.UtilityAlt1",
+        "Skins.Captain.Alt1"
       ]
     },
     "Croco": {
       "nick": "Croco",
       "unlocks": [
-        "Skins.Croco.Alt1",
-        "Skills.Croco.ChainableLeap"
+        "Skills.Croco.ChainableLeap",
+        "Skills.Croco.CrocoBite",
+        "Skills.Croco.PassivePoisonLethal",
+        "Skins.Croco.Alt1"
       ]
     },
     "Engineer": {
       "nick": "Engi",
       "unlocks": [
-        "Skills.Engi.WalkerTurret",
-        "Skills.Engi.SpiderMine"
+        "Skills.Engi.Harpoon",
+        "Skills.Engi.SpiderMine",
+        "Skills.Engi.WalkerTurret"
       ]
     },
     "Huntress": {
       "nick": "Huntress",
       "unlocks": [
-        "Skins.Huntress.Alt1",
+        "Skills.Huntress.FlurryArrow",
         "Skills.Huntress.MiniBlink",
-        "Skills.Huntress.Snipe"
+        "Skills.Huntress.Snipe",
+        "Skins.Huntress.Alt1"
       ]
     },
     "Loader": {
       "nick": "Loader",
       "unlocks": [
-        "Skins.Loader.Alt1",
+        "Skills.Loader.Thunderslam",
+        "Skills.Loader.YankHook",
         "Skills.Loader.ZapFist",
-        "Skills.Loader.YankHook"
+        "Skins.Loader.Alt1"
       ]
     },
     "Mage": {
       "nick": "Mage",
       "unlocks": [
-        "Skins.Mage.Alt1",
         "Skills.Mage.FlyUp",
         "Skills.Mage.IceBomb",
-        "Skills.Mage.LightningBolt"
+        "Skills.Mage.LightningBolt",
+        "Skins.Mage.Alt1"
       ]
     },
     "Mercenary": {
       "nick": "Merc",
       "unlocks": [
-        "Skins.Merc.Alt1",
         "Skills.Merc.EvisProjectile",
-        "Skills.Merc.Uppercut"
+        "Skills.Merc.FocusedAssault",
+        "Skills.Merc.Uppercut",
+        "Skins.Merc.Alt1"
       ]
     },
     "Toolbot": {
       "nick": "Toolbot",
       "unlocks": [
-        "Skins.Toolbot.Alt1",
+        "Skills.Toolbot.Buzzsaw",
         "Skills.Toolbot.Grenade",
-        "Skills.Toolbot.Buzzsaw"
+        "Skills.Toolbot.SpecialAlt",
+        "Skins.Toolbot.Alt1"
       ]
     },
     "Treebot": {
       "nick": "Treebot",
       "unlocks": [
-        "Skins.Treebot.Alt1",
+        "Skills.Treebot.Barrage",
         "Skills.Treebot.PlantSonicBoom",
-        "Skills.Treebot.Barrage"
+        "Skills.Treebot.SpecialAlt1",
+        "Skins.Treebot.Alt1"
       ]
     }
   },
@@ -88,12 +106,12 @@
     "Artifacts.Swarms",
     "Artifacts.TeamDeath",
     "Artifacts.WeakAssKnees",
+    "Artifacts.WispOnDeath",
     "Items.AttackSpeedOnCrit",
     "Items.AutoCastEquipment",
     "Items.BFG",
     "Items.Bear",
     "Items.BossDamageBonus",
-    "Items.BonusGoldPackOnKill",
     "Items.BounceNearby",
     "Items.BurnNearby",
     "Items.Cleanse",
@@ -106,8 +124,9 @@
     "Items.ExecuteLowHealthElite",
     "Items.ExtraLife",
     "Items.Firework",
+    "Items.FlatHealth",
+    "Items.FocusConvergence",
     "Items.Gateway",
-    "Items.GainArmor",
     "Items.GoldGat",
     "Items.HealOnCrit",
     "Items.Hoof",
@@ -115,44 +134,41 @@
     "Items.Infusion",
     "Items.JumpBoost",
     "Items.KillEliteFrenzy",
-    "Items.LaserTurbine",
     "Items.Lightning",
-    "Items.LunarPrimaryReplacement",
-    "Items.LunarTrinket",
-    "Items.LunarUtilityReplacement",
+    "Items.LightningStrikeOnHit",
+    "Items.LunarSecondaryReplacement",
+    "Items.LunarSkillReplacements",
+    "Items.LunarSpecialReplacement",
     "Items.Medkit",
     "Items.Meteor",
     "Items.NovaOnHeal",
-    "Items.NovaOnLowHealth",
+    "Items.ParentEgg",
     "Items.PassiveHealing",
-    "Items.Pearl",
-    "Items.ProtectionPotion",
-    "Items.RegenOnKill",
+    "Items.Recycle",
     "Items.RepeatHeal",
+    "Items.RoboBallBuddy",
     "Items.Scanner",
     "Items.SecondarySkillMagazine",
-    "Items.ShinyPearl",
     "Items.ShockNearby",
+    "Items.SkullCounter",
+    "Items.Squid",
     "Items.Talisman",
-    "Items.Thorns",
     "Items.Tonic",
     "Items.TreasureCache",
-    "Items.WarCryOnMultiKill",
-    "Items.ArmorPlate",
-    "Items.Squid",
-    "Items.DeathMark",
-    "Items.Plant",
-    "Items.Incubator",
-    "Items.FocusConvergence",
-    "Items.Recycle"
+    "Items.WarCryOnMultiKill"
   ],
   "Achievements": [
     "AttackSpeed",
     "AutomationActivation",
+    "Bandit2ClearGameMonsoon",
+    "Bandit2ConsecutiveReset",
+    "Bandit2RevolverFinale",
+    "Bandit2StackSuperBleed",
     "BeatArena",
     "BurnToDeath",
     "CaptainBuyMegaDrone",
     "CaptainClearGameMonsoon",
+    "CaptainSupplyDropFinale",
     "CaptainVisitSeveralStages",
     "CarryLunarItems",
     "ChargeTeleporterWhileNearDeath",
@@ -205,6 +221,7 @@
     "KillTotalEnemies",
     "LoaderBigSlam",
     "LoaderClearGameMonsoon",
+    "LoaderKillLoaders",
     "LoaderSpeedRun",
     "LogCollector",
     "LoopOnce",
@@ -217,6 +234,7 @@
     "MercClearGameMonsoon",
     "MercCompleteTrialWithFullHealth",
     "MercDontTouchGround",
+    "MercXSkillsInYSeconds",
     "MoveSpeed",
     "MultiCombatShrine",
     "NeverBackDown",
@@ -241,11 +259,13 @@
     "RescueTreebot",
     "StayAlive1",
     "SuicideHermitCrabs",
+    "ToolbotBeatArenaLater",
     "ToolbotClearGameMonsoon",
     "ToolbotGuardTeleporter",
     "ToolbotKillImpBossWithBfg",
     "TotalDronesRepaired",
     "TotalMoneyCollected",
+    "TreebotBigHeal",
     "TreebotClearGameMonsoon",
     "TreebotDunkClayBoss",
     "TreebotLowHealthTeleporter",

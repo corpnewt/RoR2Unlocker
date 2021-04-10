@@ -15,7 +15,7 @@ class RORUnlock:
 
     def __init__(self):
         self.tk = tk.Tk()
-        self.tk.resizable(False, False)
+        self.tk.resizable(True, True)
         self.user_folders  = os.path.join(os.environ['SYSTEMDRIVE'] + "\\", "Program Files (x86)", "Steam", "userdata")
         self.settings_path = os.path.join("632360","remote","UserProfiles")
         self.id_list = self.check_folders()
@@ -100,7 +100,6 @@ class RORUnlock:
         self.char_box.grid(row=3,column=4,rowspan=4,columnspan=2,padx=(10,0),sticky="wens")
         self.char_box.config(yscrollcommand=self.char_scroll.set)
         self.char_scroll.configure(command=self.char_box.yview)
-        self.char_box.bind("<<ListboxSelect>>",self.char_selected)
         self.skil_scroll = tk.Scrollbar(self.tk, orient=tk.VERTICAL)
         self.skil_scroll.grid(row=3,column=10,rowspan=4,sticky="nsew",padx=(0,10))
         self.skil_box = tk.Listbox(self.tk,exportselection=False)
@@ -123,6 +122,13 @@ class RORUnlock:
         self.skil_combo.grid(row=8,column=8,columnspan=4,sticky="we",padx=10,pady=10)
         self.achi_combo = ttk.Combobox(self.tk,values=[])
         self.achi_combo.grid(row=8,column=12,columnspan=4,sticky="we",padx=10,pady=10)
+
+        # Add the list box events
+        self.item_box.bind("<Double-1>",lambda x:self.item_selected(self.item_box,self.item_combo))
+        self.char_box.bind("<Double-1>",lambda x:self.item_selected(self.char_box,self.char_combo))
+        self.skil_box.bind("<Double-1>",lambda x:self.item_selected(self.skil_box,self.skil_combo))
+        self.achi_box.bind("<Double-1>",lambda x:self.item_selected(self.achi_box,self.achi_combo))
+        self.char_box.bind("<<ListboxSelect>>",self.char_selected)
 
         # Add the Unlock/Lock buttons
         self.item_unlock = tk.Button(self.tk,text="Unlock",command=self.unlock_item)
@@ -559,6 +565,13 @@ class RORUnlock:
             self.skil_box.see(0)
         # Let's get any applicable unlocks for our current character
         self.skil_combo["values"] = sorted(self.data.get("Characters",{}).get(current_character.split(".")[-1],{}).get("unlocks",[]))
+
+    def item_selected(self, list_box = None, combo_box = None):
+        # Sets the combo box to the double clicked item
+        if not list_box or not combo_box: return
+        try: current = list_box.get(list_box.curselection())
+        except: return
+        combo_box.set(current)
 
     def check_folders(self):
         self.id_list = {}

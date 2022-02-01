@@ -1,4 +1,5 @@
-import sys, os, json, shutil
+import os, json, shutil, string
+from ctypes import windll
 import xml.etree.ElementTree as ET
 try:
     import Tkinter as tk
@@ -16,7 +17,7 @@ class RORUnlock:
     def __init__(self):
         self.tk = tk.Tk()
         self.tk.resizable(True, True)
-        self.user_folders  = os.path.join(os.environ['SYSTEMDRIVE'] + "\\", "Program Files (x86)", "Steam", "userdata")
+        self.user_folders  = os.path.join("Program Files (x86)", "Steam", "userdata")
         self.settings_path = os.path.join("632360","remote","UserProfiles")
         self.id_list = self.check_folders()
         self.current_id = None
@@ -263,8 +264,8 @@ class RORUnlock:
         profile = self.get_current_profile()
         if not profile: return # Nothing to save
         # Ensure we have a backup first
-        target_file = os.path.join(self.user_folders,profile["id"],self.settings_path,profile["file"])
-        backup_file = os.path.join(self.user_folders,profile["id"],self.settings_path,profile["file"]+".bak")
+        target_file = profile["full_path"]
+        backup_file = profile["full_path"]+".bak"
         if not os.path.exists(backup_file):
             shutil.copyfile(target_file,backup_file)
         output_xml = ET.tostring(profile["root"],encoding="unicode")
@@ -318,7 +319,6 @@ class RORUnlock:
         if not profile: return
         achis = profile["root"].find("achievementsList").text
         achis = achis.split() if achis else [] # Just in case it was None
-        new_achis = []
         for x in achis:
             if x.lower() == element.lower():
                 return False
@@ -358,6 +358,11 @@ class RORUnlock:
         try: return int(self.get_current_profile()["root"].find("coins").text)
         except: return 0
 
+    def clear_boxes(self):
+        # Remove the current items
+        for box in (self.item_box,self.char_box,self.skil_box,self.achi_box):
+            box.delete(0,tk.END)
+
     def update_boxes(self, preserve_selection = True):
         # This is a helper method to gather our current selections from each box,
         # then update the items within, and retain the selection if possible.
@@ -376,10 +381,7 @@ class RORUnlock:
         else:
             curr_item = curr_char = curr_skil = curr_achi = None
         # Remove the current items
-        self.item_box.delete(0,tk.END)
-        self.char_box.delete(0,tk.END)
-        self.skil_box.delete(0,tk.END)
-        self.achi_box.delete(0,tk.END)
+        self.clear_boxes()
         # Gather and walk the Item and Character unlocks
         unlocks = [x.text for x in profile["root"].iter("unlock")]
         items = [x for x in unlocks if x.lower().startswith(("artifacts.","items."))]
@@ -437,9 +439,10 @@ class RORUnlock:
             # Set the profile - and show the items/characters
             self.r_menu["menu"].delete(0,"end")
             for x in self.id_list[self.s_string.get()]:
-                # self.s_menu["menu"].add_command(label=x,command=tk._setit(self.s_string,x))
                 self.r_menu["menu"].add_command(label=x["name"],command=lambda menu=self.r_menu, value=x["name"], var=self.r_string: self.option_pick(menu,value,var))
+            self.r_string.set("Select a Profile")
             # Enable the profiles and stuff
+            self.clear_boxes()
             self.set_stage(1)
         elif menu == self.r_menu:
             profile = self.get_current_profile()
@@ -625,32 +628,44 @@ class RORUnlock:
         except: return
         combo_box.set(current)
 
+    def get_drives(self):
+        # From: https://stackoverflow.com/a/827398
+        drives = []
+        bitmask = windll.kernel32.GetLogicalDrives()
+        for letter in string.ascii_uppercase:
+            if bitmask & 1:
+                drives.append(letter)
+            bitmask >>= 1
+        return drives
+
     def check_folders(self):
         self.id_list = {}
-        if not os.path.exists(self.user_folders):
-            return self.id_list
-        for x in os.listdir(self.user_folders):
-            # Check for our game path
-            temp = os.path.join(self.user_folders,x,self.settings_path)
-            if os.path.exists(temp):
-                # Let's load the xml and try to get the name
-                for y in os.listdir(temp):
-                    if y.startswith(".") or not y.lower().endswith(".xml"):
-                        continue
-                    # We should have a valid xml file - try to load it
-                    xml = ET.parse(os.path.join(temp,y))
-                    root = xml.getroot()
-                    name = root.find("name").text
-                    # coin = root.find("coins").text
-                    if not x in self.id_list:
-                        self.id_list[x] = []
-                    self.id_list[x].append({
-                        "id":x,
-                        "file":y,
-                        "xml":xml,
-                        "root":root,
-                        "name":name
-                        })
+        for drive in self.get_drives():
+            check_folder = os.path.join(drive+":\\",self.user_folders)
+            if not os.path.isdir(check_folder): continue
+            for x in os.listdir(check_folder):
+                # Check for our game path
+                temp = os.path.join(check_folder,x,self.settings_path)
+                if os.path.exists(temp):
+                    # Let's load the xml and try to get the name
+                    for y in os.listdir(temp):
+                        if y.startswith(".") or not y.lower().endswith(".xml"):
+                            continue
+                        # We should have a valid xml file - try to load it
+                        xml = ET.parse(os.path.join(temp,y))
+                        root = xml.getroot()
+                        name = root.find("name").text
+                        id_name = "{} ({}:)".format(x,drive)
+                        if not id_name in self.id_list:
+                            self.id_list[id_name] = []
+                        self.id_list[id_name].append({
+                            "id":x,
+                            "file":y,
+                            "xml":xml,
+                            "root":root,
+                            "name":name,
+                            "full_path":os.path.join(temp,y)
+                            })
         return self.id_list
 
 if __name__ == '__main__':

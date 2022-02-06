@@ -1,4 +1,4 @@
-import os, json, shutil, string
+import os, json, shutil, string, subprocess
 from ctypes import windll
 import xml.etree.ElementTree as ET
 try:
@@ -17,7 +17,8 @@ class RORUnlock:
     def __init__(self):
         self.tk = tk.Tk()
         self.tk.resizable(True, True)
-        self.user_folders  = os.path.join("Program Files (x86)", "Steam", "userdata")
+        self.steam64_folder  = os.path.join("Program Files (x86)", "Steam")
+        self.steam32_folder  = os.path.join("Program Files", "Steam")
         self.settings_path = os.path.join("632360","remote","UserProfiles")
         self.id_list = self.check_folders()
         self.current_id = None
@@ -638,14 +639,56 @@ class RORUnlock:
             bitmask >>= 1
         return drives
 
+    def get_steam_and_library_userdata(self):
+        # Attempt to get the install location of Steam via the registry
+        paths = []
+        for path in ("HKLM\\SOFTWARE\\WOW6432Node\\Valve\\Steam","HKLM\\SOFTWARE\\Valve\\Steam"):
+            p = subprocess.Popen(["reg.exe","query",path,"/v","InstallPath"],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            o,e = p.communicate()
+            if 2/3!=0: o = o.decode("utf-8")
+            o = o.replace("\r","") # Strip carriage returns
+            for line in o.split("\n"):
+                line = line.lstrip()
+                if not line.lower().startswith("installpath"): continue
+                # Got the line
+                try:
+                    s_path = line[line.index("REG_SZ")+len("REG_SZ"):].lstrip()
+                    if os.path.isdir(s_path):
+                        # Got a valid directory
+                        paths.append(s_path)
+                        # Check for libraries
+                        paths.extend(self.get_steam_library_paths(s_path))
+                except: continue
+        return sorted(list(set(paths)))
+
+    def get_steam_library_paths(self,steam_path):
+        check_path = os.path.join(steam_path,"steamapps","libraryfolders.vdf")
+        paths = []
+        if not os.path.isfile(check_path):
+            return paths
+        # Open the file and scrape for pathing
+        with open(check_path,"rb") as f:
+            l = f.read().decode("utf-8")
+        for line in l.split("\n"):
+            line = line.lstrip()
+            if not line.startswith('"path"\t\t'): continue
+            # Got a path - save it
+            try: paths.append(line[9:-1].replace("\\\\","\\"))
+            except: continue
+        return paths        
+
     def check_folders(self):
         self.id_list = {}
-        for drive in self.get_drives():
-            check_folder = os.path.join(drive+":\\",self.user_folders)
-            if not os.path.isdir(check_folder): continue
-            for x in os.listdir(check_folder):
+        check_paths = self.get_steam_and_library_userdata()
+        for x in (self.steam32_folder,self.steam64_folder):
+            check_paths.extend([os.path.join(drive+":\\",x) for drive in self.get_drives()])
+        check_paths = sorted(list(set(check_paths)))
+        for check_folder in check_paths:
+            user_folder = os.path.join(check_folder,"userdata")
+            if not os.path.isdir(user_folder): continue
+            for x in os.listdir(user_folder):
                 # Check for our game path
-                temp = os.path.join(check_folder,x,self.settings_path)
+                temp = os.path.join(user_folder,x,self.settings_path)
                 if os.path.exists(temp):
                     # Let's load the xml and try to get the name
                     for y in os.listdir(temp):
@@ -655,7 +698,7 @@ class RORUnlock:
                         xml = ET.parse(os.path.join(temp,y))
                         root = xml.getroot()
                         name = root.find("name").text
-                        id_name = "{} ({}:)".format(x,drive)
+                        id_name = "{} ({}:)".format(x,temp.split(":")[0])
                         if not id_name in self.id_list:
                             self.id_list[id_name] = []
                         self.id_list[id_name].append({

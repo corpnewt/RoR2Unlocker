@@ -229,7 +229,8 @@ class RORUnlock:
         # We need to get the Items, Characters, Skills, and Achievements,
         # organize and sort them - then save to the target json
         out_dict = {"Characters":{},"Items":[],"Achievements":[]}
-        char_dict = {}
+        # Start with the commando as it's always unlocked
+        char_dict = {"Commando":{"nick":"Commando","unlocks":[]}}
         # Let's gather all the characters, artifacts, and items
         for x in profile["root"].iter("unlock"):
             if x.text.lower().startswith("characters."):
@@ -287,6 +288,8 @@ class RORUnlock:
         return found
 
     def unlock(self, element):
+        if element.lower() == "characters.commando":
+            return False # commando is unlocked by default
         profile = self.get_current_profile()
         if not profile: return
         # Assume we typed a new one - let's add it.  Check if it exists first
@@ -386,7 +389,8 @@ class RORUnlock:
         # Gather and walk the Item and Character unlocks
         unlocks = [x.text for x in profile["root"].iter("unlock")]
         items = [x for x in unlocks if x.lower().startswith(("artifacts.","items."))]
-        chars = [x for x in unlocks if x.lower().startswith("characters.")]
+        # Preserve the commando as it's unlocked by default
+        chars = ["Characters.Commando"]+[x for x in unlocks if x.lower().startswith("characters.")]
         achis = profile["root"].find("achievementsList").text
         achis = achis.split() if achis else [] # Just in case it was None
         for x in items: self.item_box.insert(tk.END,x)

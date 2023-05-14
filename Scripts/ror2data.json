@@ -41,7 +41,8 @@
       "unlocks": [
         "Skills.Engi.Harpoon",
         "Skills.Engi.SpiderMine",
-        "Skills.Engi.WalkerTurret"
+        "Skills.Engi.WalkerTurret",
+        "Skins.Engi.Alt1"
       ]
     },
     "Huntress": {
@@ -126,6 +127,7 @@
     "Items.Cleanse",
     "Items.Clover",
     "Items.Crowbar",
+    "Items.DeathProjectile",
     "Items.DroneBackup",
     "Items.ElementalRings",
     "Items.EnergizedOnEquipmentUse",
@@ -145,6 +147,7 @@
     "Items.KillEliteFrenzy",
     "Items.Lightning",
     "Items.LightningStrikeOnHit",
+    "Items.LunarBadLuck",
     "Items.LunarSecondaryReplacement",
     "Items.LunarSkillReplacements",
     "Items.LunarSpecialReplacement",

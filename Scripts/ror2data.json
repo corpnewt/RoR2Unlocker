@@ -1,5 +1,14 @@
 {
   "Characters": {
+    "Commando": {
+      "nick": "Commando",
+      "unlocks": [
+        "Skills.Commando.FireShotgunBlast",
+        "Skills.Commando.SlideJet",
+        "Skills.Commando.ThrowGrenade",
+        "Skins.Commando.Alt1"
+      ]
+    },
     "Bandit2": {
       "nick": "Bandit2",
       "unlocks": [

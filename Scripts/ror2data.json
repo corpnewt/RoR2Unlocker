@@ -98,6 +98,60 @@
         "Skills.Treebot.SpecialAlt1",
         "Skins.Treebot.Alt1"
       ]
+    },
+    "Railgunner": {
+      "nick": "Railgunner",
+      "unlocks": [
+        "Skills.Railgunner.UtilityAlt1",
+        "Skills.Railgunner.SpecialAlt1",
+        "Skills.Railgunner.SecondaryAlt1",
+        "Skins.RailGunner.Alt1"
+      ]
+    },
+    "VoidSurvivor": {
+      "nick": "VoidSurvivor",
+      "unlocks": [
+        "Skills.VoidSurvivor.Cleanse",
+        "Skills.VoidSurvivor.Suppress",
+        "Skills.VoidSurvivor.Drown",
+        "Skins.VoidSurvivor.Alt1"
+      ]
+    },
+    "Heretic": {
+      "nick": "Heretic",
+      "unlocks": [
+        "Skills.Heretic.Shadowfade",
+        "Skills.Heretic.Squall",
+        "Skills.Heretic.Visions",
+        "Skins.Heretic.Alt1"
+      ]
+    },
+    "Seeker": {
+      "nick": "Seeker",
+      "unlocks": [
+        "Skills.Seeker.Sojourn",
+        "Skills.Seeker.Meditate",
+        "Skills.Seeker.Whirlwind",
+        "Skins.Seeker.Alt1"
+      ]
+    },
+    "FalseSon": {
+      "nick": "FalseSon",
+      "unlocks": [
+        "Skills.FalseSon.Laser",
+        "Skills.FalseSon.Cluster",
+        "Skills.FalseSon.Meteor",
+        "Skins.FalseSon.Alt1"
+      ]
+    },
+    "Chef": {
+      "nick": "Chef",
+      "unlocks": [
+        "Skills.Chef.Dice",
+        "Skills.Chef.Roll",
+        "Skills.Chef.Flambe",
+        "Skins.Chef.Alt1"
+      ]
     }
   },
   "Items": [
@@ -167,7 +221,41 @@
     "Items.Talisman",
     "Items.Tonic",
     "Items.TreasureCache",
-    "Items.WarCryOnMultiKill"
+    "Items.WarCryOnMultiKill",
+    "Items.VoidBarnacle",
+    "Items.VoidCoin",
+    "Items.VoidMegaCrab",
+    "Items.VoidTriple",
+    "Items.VoidShield",
+    "Items.ConsumeOnMeteor",
+    "Items.ExtraLifeConsumed",
+    "Items.ExtraLifeVoid",
+    "Items.FragileDamageBonus",
+    "Items.LightFlux",
+    "Items.LowerPriceOnKill",
+    "Items.MonsoonPlayerHelper",
+    "Items.OutOfCombatArmor",
+    "Items.RegeneratingScrap",
+    "Items.SlowOnHit",
+    "Items.CritGlassesVoid",
+    "Items.BleedOnHitVoid",
+    "Items.ChainLightning",
+    "Items.CritOnUse",
+    "Items.ElementalBandUnite",
+    "Items.EquipmentMagazineVoid",
+    "Items.ExplodeOnDeathVoid",
+    "Items.ExtraLifeVoid",
+    "Items.HealingPotionConsumed",
+    "Items.ImmuneToDebuff",
+    "Items.MoreMissile",
+    "Items.PermanentDebuffOnHit",
+    "Items.PrimarySkillShuriken",
+    "Items.RandomEquipmentTrigger",
+    "Items.RandomlyLunar",
+    "Items.SlowOnHitVoid",
+    "Items.TeleportWhenLowHealth",
+    "Items.TreasureCacheVoid",
+    "Items.VoidMegaCrabItem"
   ],
   "Achievements": [
     "AttackSpeed",
@@ -281,6 +369,29 @@
     "TreebotClearGameMonsoon",
     "TreebotDunkClayBoss",
     "TreebotLowHealthTeleporter",
-    "UseThreePortals"
+    "UseThreePortals",
+    "RailgunnerClearGameMonsoon",
+    "RailgunnerTrickshot",
+    "RailgunnerMarksman",
+    "RailgunnerAnnihilator",
+    "VoidSurvivorClearGameMonsoon",
+    "VoidSurvivorCleanse",
+    "VoidSurvivorSuppress",
+    "VoidSurvivorDrown",
+    "HereticShadowfade",
+    "HereticSquall",
+    "HereticVisions",
+    "SeekerClearGameMonsoon",
+    "SeekerSojourn",
+    "SeekerMeditate",
+    "SeekerWhirlwind",
+    "FalseSonClearGameMonsoon",
+    "FalseSonLaser",
+    "FalseSonCluster",
+    "FalseSonMeteor",
+    "ChefClearGameMonsoon",
+    "ChefDice",
+    "ChefRoll",
+    "ChefFlambe"
   ]
 }
